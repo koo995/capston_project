@@ -11,3 +11,6 @@ MIDDLEWARE = [
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# 개발환경에서만 쓰기 위함
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]

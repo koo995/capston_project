@@ -20,7 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     nick_name = models.CharField(
         "닉네임", max_length=150, unique=True, validators=[username_validator]
     )
-    email = models.EmailField("이메일", unique=True, blank=True)
+    email = models.EmailField("이메일", blank=True)
     is_staff = models.BooleanField("스태프 권한", default=False)
     is_active = models.BooleanField("사용여부", default=True)
     date_joined = models.DateTimeField("가입일", auto_now_add=True)
