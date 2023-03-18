@@ -10,7 +10,10 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ["content"]
 
     def photo_thumbnail(self, post):
-        return mark_safe(f"<img src={post.photo.url} style='width:100px;' />")
+        if post.photo:
+            return mark_safe(f"<img src={post.photo.url} style='width:100px;' />")
+        else:
+            return "사진없음"
 
 
 @admin.register(Comment)

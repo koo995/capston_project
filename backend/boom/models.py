@@ -27,7 +27,7 @@ class Post(TimeStampedModel):
         related_name="my_post_set",  # 여기서 like_user_set의 related_name과 충돌이 일어날수있으니까 변경해 준다. user.my_post_set을 이용해서 뽑아낼 수 있다.
         on_delete=models.CASCADE,
     )
-    photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d")
+    photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d", blank=True)
     content = models.CharField(verbose_name="내용", max_length=1000)
     caption = models.CharField(verbose_name="태그", max_length=1000)
     tag_set = models.ManyToManyField("Tag", blank=True)
