@@ -1,13 +1,32 @@
 import React from "react";
+import { Card, Avatar } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import "./Post.scss";
 
 function Post({ post }) {
-  const { author, content, photo, caption } = post;
+  const { Meta } = Card;
+
+  const { author, title, content, photo, caption } = post;
+  const { avatar_url, nick_name } = author;
   return (
-    <div>
-      {JSON.stringify(author)}
-      {content}
-      <img src={photo} alt={photo} style={{ width: "100px" }} /> {caption}
-    </div>
+    <Card
+      hoverable
+      style={{
+        width: 300,
+        border: "2px solid Black",
+      }}
+      className="post-card"
+      cover={<img alt="example" src={photo} style={{ width: "95%" }} />}
+      // actions={[<EditOutlined key="edit" />]}
+    >
+      <Meta
+        // avatar={<Avatar src={avatar_url} />}
+        title={title}
+        // description={content}
+      />
+      <hr />
+      <div>{caption}</div>
+    </Card>
   );
 }
 
