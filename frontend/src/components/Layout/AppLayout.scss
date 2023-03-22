@@ -9,8 +9,8 @@
     "footer footer footer";
     gap: 1rem; //최상위 element(html)에서 정의된 기본 폰트 크기만큼
     border: 3px solid #333;
-    width: 90%;
-    max-width: 100%;
+    width: 1280px;
+    max-width: 1980px;
     margin: 20px auto;
     .header {
         display: flex; //flex방식을 쓰면 모두 한줄에 처리되네? 기본적인 속성
