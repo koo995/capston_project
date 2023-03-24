@@ -12,7 +12,9 @@ function AppLayout({ children }) {
     <div className="app">
       <div className="header">
         <h1 className="page-title">
-          <img src={LogoImage} alt="instagram" style={{ width: 150 }} />
+          <a href="http://localhost:3000">
+            <img src={LogoImage} alt="instagram" style={{ width: 150 }} />
+          </a>
         </h1>
         <div className="search">
           {/* 이렇게 하면 search의 길이가 줄어지네? */}
