@@ -7,7 +7,7 @@ import { PlusOutlined } from "@ant-design/icons";
 
 export default function Signip() {
   const history = useHistory();
-  // const [fieldErrors, setFieldErrors] = useState({});
+  const [fieldErrors, setFieldErrors] = useState({});
   const [file, setFile] = useState("");
 
   const handleUploadChange = ({ file }) => {
@@ -29,7 +29,7 @@ export default function Signip() {
         formData.append("avatar", avatar.file);
       }
 
-      // setFieldErrors({});
+      setFieldErrors({});
       try {
         await Axios.post("http://127.0.0.1:8000/account/signup/", formData);
         notification.open({
@@ -45,6 +45,32 @@ export default function Signip() {
         console.log(error);
 
         if (error.response) {
+          const { data: fieldsErrorMessages } = error.response;
+          console.log("fieldsErrorMessages: ", fieldsErrorMessages);
+          console.log(
+            "fieldsErrorMessages: ",
+            Object.entries(fieldsErrorMessages)
+          );
+          setFieldErrors(
+            //python에서 mydict.items()와 비슷한 문법이다. 이렇게 표현함으로써 iterable한 객체를 얻는다?
+            Object.entries(fieldsErrorMessages).reduce(
+              //실제로 많이 쓰이는 변형방법이니까 알아두자 반드시
+              (acc, [fieldName, errors]) => {
+                // errors : ["m1", "m2"].join(" ") => "m1 m2"
+                acc[fieldName] = {
+                  //antd에서 정의한 방식에 맞춰어 만들어줬다?
+                  validateStatus: "error",
+                  help: errors.join(" "), //에러값을 문자열로 변경해서 help로 보여준다
+                };
+                return acc;
+              },
+              {} //빈 object의 초기값
+            )
+          );
+          console.log("fieldErrors", fieldErrors);
+          //여기서는 왜 중괄호를 써야하는지 알겠어 객체를 전개했는데 그것을 오브젝트로 담아야 뭔가가 표현되지
+          //단순 전개한체로는 콘솔창에 띄울수가없지
+          console.log("...fieldErrors", { ...fieldErrors.username });
           notification.open({
             message: "회원가입 실패!",
             icon: <FrownOutlined style={{ color: "#ff3333" }} />,
@@ -53,9 +79,6 @@ export default function Signip() {
               console.log("Notification Clicked!");
             },
           });
-
-          const { data: fieldsErrorMessages } = error.response;
-          console.log("fieldsErrorMessages: ", fieldsErrorMessages);
         }
       }
     }
@@ -77,7 +100,7 @@ export default function Signip() {
           name="username"
           rules={[{ required: true, message: "Please input your username!" }]} //rules을 통해 유효성검사로직이 들어가 잇다
           //hasFeedback //username의 끝 부분에 체크표시?
-          //{...fieldErrors.username}
+          {...fieldErrors.username} //스프레드 시키는 녀석인지는 알겠는데 왜 중괄호를 써야할까?
         >
           <Input />
         </Form.Item>
@@ -89,12 +112,17 @@ export default function Signip() {
             { required: true, message: "Please input your password!" },
             { min: 5, message: "5자리 이상 해주세요" }, // 한글자 한글자 들어갈때마다 검사해준다.
           ]}
-          //{...fieldErrors.password}
+          {...fieldErrors.password}
         >
           <Input.Password />
         </Form.Item>
 
-        <Form.Item label="닉네임" name="nick_name" rules={[{ required: true }]}>
+        <Form.Item
+          label="닉네임"
+          name="nick_name"
+          rules={[{ required: true }]}
+          {...fieldErrors.nick_name}
+        >
           <Input />
         </Form.Item>
         {/* FIXME 회원가입에 아무것도 안넣어도 되도록. undefined가 들어가서 오류가 뜬다 */}
