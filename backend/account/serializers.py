@@ -17,12 +17,11 @@ class SignupSerializer(serializers.ModelSerializer):
     avatar_url = serializers.CharField(read_only=True)
 
     def create(self, validated_data):
-        avatar = validated_data.get("avatar", None)
         user = User.objects.create(
             username=validated_data["username"],
             nick_name=validated_data["nick_name"],
             email=validated_data["email"],
-            avatar=avatar,
+            avatar=validated_data.get("avatar", None),
         )  # FIXME: 여기서 이렇게 하나하나 지정하는 것보다 super().create로 할 방법이 없을까
         user.set_password(validated_data["password"])
         user.save()
@@ -39,3 +38,11 @@ class SignupSerializer(serializers.ModelSerializer):
             "avatar",
             "avatar_url",
         ]
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    avatar_url = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = "__all__"
