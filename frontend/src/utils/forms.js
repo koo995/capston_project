@@ -1,4 +1,5 @@
 export function parseErrorMessages(fieldsErrorMessages) {
+  //python에서 mydict.items()와 비슷한 문법이다
   return Object.entries(fieldsErrorMessages).reduce(
     //실제로 많이 쓰이는 변형방법이니까 알아두자 반드시
     (acc, [fieldName, errors]) => {

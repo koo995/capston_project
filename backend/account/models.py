@@ -11,7 +11,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(
         "아이디",
-        max_length=10,
+        max_length=15,
         unique=True,
         validators=[username_validator],
     )
