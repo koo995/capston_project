@@ -11,7 +11,7 @@ function AccountSideBar() {
 
   return (
     <>
-      {isAuthenticated ? (
+      {isAuthenticated ? ( //여기를 소괄호로 감싸주는 이유...
         <Button
           danger
           onClick={() => {

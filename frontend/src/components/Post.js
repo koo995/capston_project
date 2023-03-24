@@ -20,9 +20,15 @@ function Post({ post }) {
       // actions={[<EditOutlined key="edit" />]}
     >
       <Meta
-        // avatar={<Avatar src={avatar_url} />}
+        avatar={
+          <Avatar
+            icon={
+              <img src={"http://localhost:8000" + avatar_url} alt={"아바타"} />
+            }
+          />
+        }
         title={title}
-        // description={content}
+        description={content}
       />
       <hr />
       <div>{caption}</div>
