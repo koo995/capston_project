@@ -51,10 +51,15 @@ export default function Login() {
         console.log(error);
 
         if (error.response) {
+          const { data: fieldsErrorMessages } = error.response;
+          console.log("에러메세지: ", fieldsErrorMessages.detail);
+          // setFieldErrors(parseErrorMessages(fieldsErrorMessages)); //signup과 형식이 달라서 이건 안되겟네
+
           notification.open({
             message: "로그인 실패!",
             icon: <FrownOutlined style={{ color: "#ff3333" }} />,
-            description: "아이디/암호를 확인해 주세요.",
+            // description: "아이디/암호를 확인해 주세요.",
+            description: `${fieldsErrorMessages.detail}`,
             onClick: () => {
               console.log("Notification Clicked!");
             },
