@@ -1,18 +1,46 @@
 import React from "react";
-import { Menu } from "antd";
+import { Button } from "antd";
+import { useHistory } from "react-router-dom";
+import { useAppContext } from "store";
+import { deleteToken } from "store";
 
 function AccountSideBar() {
+  const history = useHistory();
+  const { store, dispatch } = useAppContext();
+  const { isAuthenticated } = store;
+
   return (
-    <div>
-      {/* <Menu
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
-        mode="horizontal inline"
-      >
-        <Menu.Item>Avatar</Menu.Item>
-        <Menu.Item>로그아웃</Menu.Item>
-      </Menu> */}
-    </div>
+    <>
+      {isAuthenticated ? (
+        <Button
+          danger
+          onClick={() => {
+            dispatch(deleteToken());
+          }}
+        >
+          로그아웃
+        </Button>
+      ) : (
+        <>
+          <Button
+            type="primary"
+            onClick={() => {
+              history.push("/account/login");
+            }}
+          >
+            로그인
+          </Button>
+          <Button
+            danger
+            onClick={() => {
+              history.push("/account/signup");
+            }}
+          >
+            회원가입
+          </Button>
+        </>
+      )}
+    </>
   );
 }
 
