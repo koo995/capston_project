@@ -1,3 +1,9 @@
 .post-card {
     margin-bottom: 20px;
   }
+
+.long-content {
+  max-height: 130px; /* Adjust the height according to your needs */
+  overflow-y: auto; /* This will add a scroll bar if the content exceeds the max-height */
+  word-wrap: break-word; /* This will break long words to the next line */
+}
