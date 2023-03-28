@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Tag
+from .models import Post, Tag, Comment
 from django.contrib.auth import get_user_model
 
 
@@ -25,3 +25,11 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = "__all__"  # 이렇게 해도 위에서 author이나 tag_set을 새롭게 정의한 대로 표현이 되는구나
         # fields = ["author", "title", "content", "photo", "caption", "tag_set", "id"]
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ["id", "author", "content", "created_at"]

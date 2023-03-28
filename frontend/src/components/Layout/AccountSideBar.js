@@ -27,7 +27,7 @@ function AccountSideBar() {
   console.log("userInfo: ", userInfo);
   return (
     <>
-      {isAuthenticated ? ( //여기를 소괄호로 감싸주는 이유...
+      {isAuthenticated ? ( //여기를 소괄호로 감싸주는 이유... 코드를 더 잘 읽기위해서 라는군@!
         <div style={{ display: "flex" }}>
           <div style={{ marginRight: "20px" }}>
             <Avatar
