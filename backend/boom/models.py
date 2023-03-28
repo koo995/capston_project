@@ -36,6 +36,7 @@ class Post(TimeStampedModel):
     def __str__(self):
         return self.content
 
+    # 이걸 활용할 방안은 없는걸까
     def get_absolute_url(self):
         return reverse("boom:post_detail", kwargs={"pk": self.pk})
 
@@ -60,8 +61,9 @@ class Comment(TimeStampedModel):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField("내용")
 
-    class Meta:
-        ordering = ["-id"]
+    # 답변은 늦게 달린게 뒤에 있는게 좋으니 이렇게 하자
+    # class Meta:
+    #     ordering = ["-id"]
 
 
 class Tag(models.Model):

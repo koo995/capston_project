@@ -9,7 +9,7 @@ import Axios from "axios";
 export default function CommentList({ post }) {
   const { store, dispatch } = useAppContext();
   const { jwtAccessToken, isAuthenticated } = store;
-  const [content, setCommentContent] = useState("");
+  const [content, setContent] = useState("");
 
   const headers = { Authorization: `Bearer ${jwtAccessToken}` };
 
@@ -25,8 +25,8 @@ export default function CommentList({ post }) {
     try {
       const response = await Axios.post(apiUrl, { content }, { headers });
       console.log(response);
-      setCommentContent("");
-      refetch();
+      setContent(""); //보내고 나면 상자안에 내용을 지우기 위함
+      refetch(); //다시 불러옴
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +44,7 @@ export default function CommentList({ post }) {
       <Input.TextArea
         style={{ marginBottom: ".5em" }}
         value={content}
-        onChange={(e) => setCommentContent(e.target.value)}
+        onChange={(e) => setContent(e.target.value)}
       />
       <Button
         block
