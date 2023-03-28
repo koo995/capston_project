@@ -9,34 +9,18 @@ export default function Comment({ comment }) {
   } = comment;
   const displayName = nick_name.length === 0 ? nick_name : username;
   return (
-    <>
-      <Card
-        title={
-          <>
-            <Avatar
-              icon={
-                <img
-                  src={"http://localhost:8000" + avatar_url}
-                  alt={nick_name}
-                />
-              }
-            />
-          </>
-        }
-      >
-        <p>{content}</p>
-      </Card>
-
-      {/* <Card
-        author={displayName}
-        avatar={<Avatar src={avatar_url} alt={displayName} />}
-        content={<p>{content}</p>}
-        datetime={
-          <Tooltip title={moment().format(created_at)}>
-            <span>{moment(created_at).fromNow()}</span>
-          </Tooltip>
-        }
-      /> */}
-    </>
+    <Card
+      title={
+        <>
+          <Avatar
+            icon={
+              <img src={"http://localhost:8000" + avatar_url} alt={nick_name} />
+            }
+          />
+        </>
+      }
+    >
+      <p>{content}</p>
+    </Card>
   );
 }

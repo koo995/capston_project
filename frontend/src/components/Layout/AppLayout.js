@@ -7,7 +7,7 @@ import AlertSidebar from "./AlertSidebar";
 
 const { Search } = Input;
 
-function AppLayout({ children }) {
+function AppLayout({ children, tagbar }) {
   return (
     <div className="app">
       <div className="header">
@@ -28,7 +28,7 @@ function AppLayout({ children }) {
           <AccountSideBar />
         </div>
       </div>
-      <div className="tagbar">tag 모음</div>
+      <div className="tagbar">{tagbar}</div>
       <div className="content">{children}</div>
       <div className="alertSidebar" style={{ marginRight: "2rem" }}>
         <AlertSidebar />
