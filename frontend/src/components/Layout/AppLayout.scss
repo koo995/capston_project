@@ -4,7 +4,7 @@
     grid-template-columns: repeat(3,1fr); //1대1대1의 비율로 3등분 하겠다
     grid-template-areas: 
     "header header header"
-    "tagbar tagbar tagbar"
+    "tagbar tagbar postNewButton"
     "contents contents alertSidebar"
     "footer footer footer";
     gap: 1rem; //최상위 element(html)에서 정의된 기본 폰트 크기만큼
@@ -23,6 +23,9 @@
         grid-area: tagbar;
         justify-self: center;
 
+    }
+    .postNewButton {
+        grid-area: postNewButton;
     }
 
     .contents {
