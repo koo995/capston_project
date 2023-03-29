@@ -45,7 +45,7 @@ export default function PostNewForm() {
     <Form
       labelCol={{ span: 8 }} //부트스트랩은 한 행이 12 컬럼인데 antd는 24컬럼임
       wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
+      style={{ maxWidth: 1000 }}
       onFinish={handleFinish}
       autoComplete="off"
     >

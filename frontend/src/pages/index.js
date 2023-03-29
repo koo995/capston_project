@@ -10,7 +10,7 @@ function Root() {
   return (
     <>
       <Route exact path="/" component={Home} />
-      <Route exact path="/posts/:id" component={PostDetail} />
+      <Route exact path="/posts/:id(\d+)" component={PostDetail} />
       <LoginRequiredRoute exact path="/posts/new" component={PostNew} />
       {/* 여기서 exact을 썼더니 login profile url에 의한 페이지가 제대로 나오지 않았어*/}
       <Route path="/account" component={accountRoutes} />

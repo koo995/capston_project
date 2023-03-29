@@ -20,6 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
     # 여기서 post 모델에 있는 tag_set을 새롭게 정의할때는 변수명을 똑같이 써줘야 작동하는구나!
     # read_only을 안하니까 api에서 입력을 받는구나, many=True을 안해놓으니 아무것도 안뜨네
     tag_set = TagSerializer(read_only=True, many=True)
+    ocr_text = serializers.CharField(read_only=True)
 
     class Meta:
         model = Post

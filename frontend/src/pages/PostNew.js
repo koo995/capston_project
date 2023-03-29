@@ -6,11 +6,9 @@ import AppLayout from "components/Layout/AppLayout";
 export default function PostNew() {
   return (
     <AppLayout>
-      <div className="PostNew">
-        <Card title="질문하기">
-          <PostNewForm />
-        </Card>
-      </div>
+      <Card title="질문하기" style={{ width: "1000px" }}>
+        <PostNewForm />
+      </Card>
     </AppLayout>
   );
 }
