@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 # Register your models here.
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["id", "author", "photo_thumbnail", "title", "content"]
+    list_display = ["id", "author", "photo_thumbnail", "title", "content", "ocr_text"]
     list_display_links = ["title"]
 
     def photo_thumbnail(self, post):
