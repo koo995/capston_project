@@ -4,7 +4,7 @@ from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework import status
-from rest_framework.response import Response
+from .tasks import process_image_ocr_and_translation
 
 
 # Create your views here.
@@ -18,7 +18,8 @@ class PostViewSet(ModelViewSet):
         # save()로 인스턴스를 생성한 것임.
         tag_list = post.extract_tag_list()
         post.tag_set.add(*tag_list)
-        post.save()
+        if post.photo:
+            process_image_ocr_and_translation.delay(post.id)
 
 
 class CommentViewSet(ModelViewSet):

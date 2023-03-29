@@ -29,8 +29,9 @@ class Post(TimeStampedModel):
     )
     photo = models.ImageField(upload_to="instagram/post/%Y/%m/%d", blank=True)
     title = models.CharField(verbose_name="제목", max_length=1000)
-    content = models.CharField(verbose_name="내용", max_length=1000)
+    content = models.CharField(verbose_name="내용", max_length=2000)
     caption = models.CharField(verbose_name="태그", max_length=1000)
+    ocr_text = models.CharField(blank=True, null=True, max_length=2000)
     tag_set = models.ManyToManyField("Tag", blank=True)
 
     def __str__(self):

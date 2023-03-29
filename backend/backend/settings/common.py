@@ -10,6 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+
+# Celery settings
+# 베포를 할때는 이부분이 변경이 되어야 한다?
+CELERY_BROKER_URL = "redis://localhost:6379"
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+# CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+# CELERY_TASK_SERIALIZER = "json"
+
+
 from pathlib import Path
 import os
 from datetime import timedelta
@@ -44,6 +55,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "rest_framework_simplejwt",
+    # "django_celery_results",
     ##
     "account",
     "boom",
