@@ -13,6 +13,7 @@ export default function PostNewForm() {
   const [file, setFile] = useState("");
   const handleUploadChange = ({ file }) => {
     setFile(file);
+    console.log("여기 파일이 바꼈어: ", file);
   };
 
   const handleFinish = async (fieldValues) => {
