@@ -5,6 +5,7 @@ import { Avatar, Card } from "antd";
 import "./PostDetail.scss";
 import CommentList from "components/CommentList";
 import AppLayout from "components/Layout/AppLayout";
+import AlertSidebar from "components/Layout/AlertSidebar";
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const PostDetail = () => {
   }
 
   return (
-    <AppLayout>
+    <AppLayout alertSidebar={<AlertSidebar />}>
       <div className="card-container" style={{ marginLeft: "30px" }}>
         <h1>질문</h1>
         <Card

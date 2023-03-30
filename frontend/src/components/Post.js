@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Avatar } from "antd";
 import { useHistory } from "react-router-dom";
-import "./PostCard.scss";
+import "./Post.scss";
 
-function PostCard({ post }) {
+function Post({ post }) {
   const { Meta } = Card;
   const history = useHistory();
   const { author, title, content, photo, caption } = post;
@@ -49,4 +49,4 @@ function PostCard({ post }) {
   );
 }
 
-export default PostCard;
+export default Post;
