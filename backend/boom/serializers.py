@@ -15,12 +15,19 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ["name"]
 
 
+class SimilarPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id"]
+
+
 class PostSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
     # 여기서 post 모델에 있는 tag_set을 새롭게 정의할때는 변수명을 똑같이 써줘야 작동하는구나!
     # read_only을 안하니까 api에서 입력을 받는구나, many=True을 안해놓으니 아무것도 안뜨네
     tag_set = TagSerializer(read_only=True, many=True)
     ocr_text = serializers.CharField(read_only=True)
+    similar_post_set = SimilarPostSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post
