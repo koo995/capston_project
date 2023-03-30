@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Comment
-from .serializers import PostSerializer, CommentSerializer
+from .models import Post, Comment, Tag
+from django.db.models import Q
+from .serializers import PostSerializer, CommentSerializer, TagSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
@@ -14,6 +15,17 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        tags = self.request.query_params.get("tags", None)
+        queryset = Post.objects.all()
+        if tags:
+            tag_list = tags.split(",")
+            query = Q()
+            for tag in tag_list:
+                query |= Q(tag_set__name=tag)
+            queryset = queryset.filter(query).distinct()
+        return queryset
 
     def perform_create(self, serializer):
         post = serializer.save(author=self.request.user)  # 이 필드가 필수인데 안 넣어줘서 그랬구나...
@@ -71,3 +83,21 @@ class CommentViewSet(ModelViewSet):
         post = get_object_or_404(Post, pk=self.kwargs["post_pk"])
         serializer.save(author=self.request.user, post=post)
         return super().perform_create(serializer)
+
+
+class TagsListView(generics.ListAPIView):
+    serializer_class = TagSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Tag.objects.all()
+
+
+class TaggedPostsView(generics.ListAPIView):
+    serializer_class = PostSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        tag_name = self.kwargs["tag_name"]
+        tag = get_object_or_404(Tag, name=tag_name)
+        return tag.post_set.all()
