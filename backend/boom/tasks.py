@@ -16,6 +16,13 @@ def process_image_ocr_and_translation(post_id):
     post.save()
     # check similarity
     similar_posts = find_similar_posts(post)
+    post.similar_post_set.add(*similar_posts)
+    for similar_post in similar_posts:
+        similar_post.similar_post_set.add(post)
+        similar_post.similar_post_set.add(
+            *[sp for sp in similar_posts if sp.id != similar_post.id]
+        )
+
     print(f"Similar posts found: {len(similar_posts)}")
     for similar_post in similar_posts:
         print(
