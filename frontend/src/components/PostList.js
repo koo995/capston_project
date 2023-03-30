@@ -7,21 +7,25 @@ import { useAppContext } from "store";
 
 const apiurl = "http://localhost:8000/api/posts";
 
-function PostList() {
+function PostList({ selectedTags }) {
   const [postList, setPostList] = useState([]);
   //여기까지 토큰이 잘 전달되었는지 확인하기위함
   const { store } = useAppContext();
   console.log("store: ", store);
 
   useEffect(() => {
-    Axios.get(apiurl)
+    let apiUrl = apiurl;
+    if (selectedTags && selectedTags.length > 0) {
+      apiUrl += `?tags=${selectedTags.join(",")}`;
+    }
+    Axios.get(apiUrl)
       .then((response) => {
         const { data } = response;
         console.log("response data: ", data);
         setPostList(data);
       })
       .catch();
-  }, []);
+  }, [selectedTags]);
 
   return (
     <>
