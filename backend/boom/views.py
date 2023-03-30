@@ -26,6 +26,7 @@ class PostViewSet(ModelViewSet):
 
 class SimilarPostsView(generics.ListAPIView):
     serializer_class = PostSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         post_pk = self.kwargs["post_pk"]

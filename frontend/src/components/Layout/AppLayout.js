@@ -7,7 +7,7 @@ import AlertSidebar from "./AlertSidebar";
 
 const { Search } = Input;
 
-function AppLayout({ children, tagbar, postNewButton }) {
+function AppLayout({ children, tagbar, postNewButton, alertSidebar }) {
   return (
     <div className="app">
       <div className="header">
@@ -34,7 +34,7 @@ function AppLayout({ children, tagbar, postNewButton }) {
       </div>
       <div className="content">{children}</div>
       <div className="alertSidebar" style={{ marginRight: "2rem" }}>
-        <AlertSidebar />
+        {alertSidebar}
       </div>
       <div className="footer">footer</div>
     </div>
