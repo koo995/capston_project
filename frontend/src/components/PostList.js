@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
+import { axiosInstance } from "api";
 import Post from "./Post";
 import { Alert, Pagination } from "antd";
 import "./PostList.scss";
 import { useAppContext } from "store";
 
-const apiurl = "http://localhost:8000/api/posts";
+const apiurl = "/api/posts";
 
 function PostList({ selectedTags }) {
   const [postList, setPostList] = useState([]);
@@ -18,7 +18,8 @@ function PostList({ selectedTags }) {
     if (selectedTags && selectedTags.length > 0) {
       apiUrl += `?tags=${selectedTags.join(",")}`;
     }
-    Axios.get(apiUrl)
+    axiosInstance
+      .get(apiUrl)
       .then((response) => {
         const { data } = response;
         console.log("response data: ", data);

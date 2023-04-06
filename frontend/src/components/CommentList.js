@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Button, Input } from "antd";
-// import { axiosInstance, useAxios } from "api";
-import useAxios from "axios-hooks";
 import { useAppContext } from "store";
 import Comment from "./Comment";
-import Axios from "axios";
+import { axiosInstance, useAxios } from "api";
 
 export default function CommentList({ post }) {
   const { store, dispatch } = useAppContext();
@@ -14,16 +12,20 @@ export default function CommentList({ post }) {
   const headers = { Authorization: `Bearer ${jwtAccessToken}` };
 
   const [{ data: commentList, loading, error }, refetch] = useAxios({
-    url: `http://localhost:8000/api/posts/${post.id}/comments/`,
+    url: `/api/posts/${post.id}/comments/`,
     headers,
   });
 
   const handleCommentSave = async () => {
-    const apiUrl = `http://localhost:8000/api/posts/${post.id}/comments/`;
+    const apiUrl = `/api/posts/${post.id}/comments/`;
 
     console.group("handleCommentSave");
     try {
-      const response = await Axios.post(apiUrl, { content }, { headers });
+      const response = await axiosInstance.post(
+        apiUrl,
+        { content },
+        { headers }
+      );
       console.log(response);
       setContent(""); //보내고 나면 상자안에 내용을 지우기 위함
       refetch(); //다시 불러옴

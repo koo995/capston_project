@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "api";
 import { Avatar, Card } from "antd";
 import "./PostDetail.scss";
 import CommentList from "components/CommentList";
@@ -12,8 +12,8 @@ const PostDetail = () => {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/posts/${id}`)
+    axiosInstance
+      .get(`/api/posts/${id}`)
       .then((response) => {
         console.log("여기 postDetail response.data: ", response.data);
         setPost(response.data);

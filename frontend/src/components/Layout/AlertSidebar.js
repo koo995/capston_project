@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Alert } from "antd";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { axiosInstance } from "api";
 import PostCard from "components/PostCard";
 
 function AlertSidebar() {
@@ -9,8 +9,8 @@ function AlertSidebar() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/posts/${id}/similar`)
+    axiosInstance
+      .get(`/api/posts/${id}/similar`)
       .then((response) => {
         console.log("여기 유사한 포스트 들이야: ", response.data);
         setPosts(response.data);
