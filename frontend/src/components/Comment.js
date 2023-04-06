@@ -12,11 +12,7 @@ export default function Comment({ comment }) {
     <Card
       title={
         <>
-          <Avatar
-            icon={
-              <img src={"http://localhost:8000" + avatar_url} alt={nick_name} />
-            }
-          />
+          <Avatar icon={<img src={avatar_url} alt={nick_name} />} />
         </>
       }
     >

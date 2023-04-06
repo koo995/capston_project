@@ -36,7 +36,7 @@ const PostDetail = () => {
               <Avatar
                 icon={
                   <img
-                    src={"http://localhost:8000" + post.author.avatar_url}
+                    src={post.author.avatar_url}
                     alt={post.author.nick_name}
                   />
                 }
