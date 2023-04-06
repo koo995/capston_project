@@ -7,7 +7,6 @@ export default function Comment({ comment }) {
     content,
     created_at,
   } = comment;
-  const displayName = nick_name.length === 0 ? nick_name : username;
   return (
     <Card
       title={

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Avatar, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import { useAppContext, deleteToken } from "store";
-import Axios from "axios";
+import { axiosInstance } from "api";
 
 function AccountSideBar() {
   const history = useHistory();
@@ -12,10 +12,12 @@ function AccountSideBar() {
 
   useEffect(() => {
     async function fetchUserInfo() {
-      const apiUrl = "http://localhost:8000/account/user-info/";
+      const apiUrl = "/account/user-info/";
       const headers = { Authorization: `Bearer ${jwtAccessToken}` };
       try {
-        const { data: userInfoData } = await Axios.get(apiUrl, { headers });
+        const { data: userInfoData } = await axiosInstance.get(apiUrl, {
+          headers,
+        });
         setUserInfo(userInfoData);
         console.log("userInfoData: ", userInfoData);
       } catch (error) {

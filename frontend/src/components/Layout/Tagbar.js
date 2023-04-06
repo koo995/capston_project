@@ -1,6 +1,6 @@
 import { Space, Tag } from "antd";
 import React, { useState, useEffect, useContext } from "react";
-import useAxios from "axios-hooks";
+import { useAxios } from "api";
 import { useTagsContext } from "pages/Home";
 
 const { CheckableTag } = Tag;
@@ -10,7 +10,7 @@ export default function Tagbar({ onTagClick }) {
   const selectedTags = useTagsContext();
   console.log("여기 selectedTag: ", selectedTags);
   const [{ data: TagsData, loading, error }, refetch] = useAxios({
-    url: `http://localhost:8000/api/tags/`,
+    url: `/api/tags/`,
   });
   console.log("여기 Tags 데이터야: ", TagsData);
 

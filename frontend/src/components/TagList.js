@@ -1,6 +1,6 @@
 import { Space, Tag } from "antd";
 import { useState, useEffect } from "react";
-import useAxios from "axios-hooks";
+import { useAxios } from "api";
 
 const { CheckableTag } = Tag;
 
@@ -8,7 +8,7 @@ function TagList() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
   const [{ data: TagsData, loading, error }, refetch] = useAxios({
-    url: `http://localhost:8000/api/tags/`,
+    url: `/api/tags/`,
   });
 
   useEffect(() => {
