@@ -33,12 +33,7 @@ function AccountSideBar() {
             <Avatar
               size={"large"}
               icon={
-                userInfo && (
-                  <img
-                    src={"http://localhost:8000" + userInfo.avatar_url}
-                    alt={"아바타"}
-                  />
-                )
+                userInfo && <img src={userInfo.avatar_url} alt={"아바타"} />
               }
             />
           </div>

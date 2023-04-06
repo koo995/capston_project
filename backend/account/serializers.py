@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+import re
 
 User = get_user_model()
 
@@ -41,7 +42,16 @@ class SignupSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    avatar_url = serializers.CharField(read_only=True)
+    avatar_url = serializers.SerializerMethodField("avatar_url_field")
+
+    # def avatar_url_field(self, author):
+    #     if re.match(r"^https?://", author.avatar_url):  # 처음에 http로 시작한다면 그냥 반환한다는 조건!
+    #         return author.avatar_url
+
+    #     if "request" in self.context:
+    #         scheme = self.context["request"].scheme  # http 또는 https를 리턴한다?
+    #         host = self.context["request"].get_host()
+    #         return scheme + "://" + host + author.avatar_url
 
     class Meta:
         model = User

@@ -16,6 +16,11 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()  # 부모값을 받아오고
+        context["request"] = self.request  # 내가 원하는 값으로 담아서 넘겨준다.
+        return context
+
     # 이 부분으로 처리함으로써 밑에 있는 TaggedPostsView은 쓸모가 없어졌다
     def get_queryset(self):
         tags = self.request.query_params.get("tags", None)
@@ -40,6 +45,12 @@ class PostViewSet(ModelViewSet):
 class SimilarPostsView(generics.ListAPIView):
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
+
+    # 이 녀석도 쓰이니까 지정해 준다.
+    def get_serializer_context(self):
+        context = super().get_serializer_context()  # 부모값을 받아오고
+        context["request"] = self.request  # 내가 원하는 값으로 담아서 넘겨준다.
+        return context
 
     def get_queryset(self):
         post_pk = self.kwargs["post_pk"]
@@ -71,8 +82,8 @@ class CommentViewSet(ModelViewSet):
 
     # 여기서는 딱히 쓰이지는 않았지만 정의해두면 여러모로 좋을라나?
     def get_serializer_context(self):
-        context = super().get_serializer_context()
-        context["request"] = self.request
+        context = super().get_serializer_context()  # 부모값을 받아오고
+        context["request"] = self.request  # 내가 원하는 값으로 담아서 넘겨준다.
         return context
 
     def get_queryset(self):
