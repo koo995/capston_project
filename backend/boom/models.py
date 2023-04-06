@@ -33,9 +33,7 @@ class Post(TimeStampedModel):
     caption = models.CharField(verbose_name="태그", max_length=1000)
     ocr_text = models.CharField(blank=True, null=True, max_length=2000)
     tag_set = models.ManyToManyField("Tag", blank=True)
-    similar_post_set = models.ManyToManyField(
-        "self", blank=True, related_name="similar_posts"
-    )
+    similar_post_set = models.ManyToManyField("self", blank=True)
 
     def __str__(self):
         return self.content

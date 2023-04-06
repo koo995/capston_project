@@ -4,7 +4,7 @@ from .views import (
     PostViewSet,
     CommentViewSet,
     SimilarPostsView,
-    TaggedPostsView,
+    # TaggedPostsView,
     TagsListView,
 )
 
@@ -20,9 +20,9 @@ urlpatterns = [
         name="similar_posts",
     ),
     path("api/tags/", TagsListView.as_view(), name="Tag"),
-    path(
-        "api/tags/<str:tag_name>/posts/",
-        TaggedPostsView.as_view(),
-        name="tagged_posts",
-    ),
+    # path(
+    #     "api/tags/<str:tag_name>/posts/",
+    #     TaggedPostsView.as_view(),
+    #     name="tagged_posts",
+    # ),
 ]

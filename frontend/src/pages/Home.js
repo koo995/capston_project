@@ -29,7 +29,7 @@ function Home() {
   //여기는 tag관련됨
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const handleChange = (tag, checked) => {
+  const onTagClick = (tag, checked) => {
     const nextSelectedTags = checked
       ? [...selectedTags, tag]
       : selectedTags.filter((t) => t !== tag);
@@ -41,7 +41,7 @@ function Home() {
   return (
     <TagsContext.Provider value={selectedTags}>
       <AppLayout
-        tagbar={<Tagbar onTagClick={handleChange} />}
+        tagbar={<Tagbar onTagClick={onTagClick} />}
         children={<PostList selectedTags={selectedTags} />}
         postNewButton={postNewButton}
       />

@@ -16,6 +16,7 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
 
+    # 이 부분으로 처리함으로써 밑에 있는 TaggedPostsView은 쓸모가 없어졌다
     def get_queryset(self):
         tags = self.request.query_params.get("tags", None)
         queryset = Post.objects.all()
@@ -93,11 +94,11 @@ class TagsListView(generics.ListAPIView):
         return Tag.objects.all()
 
 
-class TaggedPostsView(generics.ListAPIView):
-    serializer_class = PostSerializer
-    permission_classes = [AllowAny]
+# class TaggedPostsView(generics.ListAPIView):
+#     serializer_class = PostSerializer
+#     permission_classes = [AllowAny]
 
-    def get_queryset(self):
-        tag_name = self.kwargs["tag_name"]
-        tag = get_object_or_404(Tag, name=tag_name)
-        return tag.post_set.all()
+#     def get_queryset(self):
+#         tag_name = self.kwargs["tag_name"]
+#         tag = get_object_or_404(Tag, name=tag_name)
+#         return tag.post_set.all()
