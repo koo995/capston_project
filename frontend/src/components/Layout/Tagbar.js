@@ -5,14 +5,6 @@ import { useTagsContext } from "pages/Home";
 
 const { CheckableTag } = Tag;
 
-// export default function Tagbar({ onTagClick }) {
-//   return (
-//     <>
-//       <TagList />
-//     </>
-//   );
-// }
-
 export default function Tagbar({ onTagClick }) {
   const [tags, setTags] = useState([]);
   const selectedTags = useTagsContext();

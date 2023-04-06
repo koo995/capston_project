@@ -4,8 +4,6 @@ import useAxios from "axios-hooks";
 
 const { CheckableTag } = Tag;
 
-// const tagsData = ["Movies", "Books", "Music", "Sports"];
-
 function TagList() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [tags, setTags] = useState([]);
