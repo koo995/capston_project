@@ -24,7 +24,7 @@ function AlertSidebar() {
         <Alert type="warning" message="유사한 포스팅이 없습니다." />
       ) : (
         <div>
-          <h2>혹시 비슷한 질문이지 않을까요?</h2>
+          <h2>비슷한 질문이지 않을까요?</h2>
           <hr />
           {posts.map((post) => {
             return <PostCard post={post} key={post.id} />; //backend에서 serializer로 id값을 표기안했더니 post.id값이 없는 값이었네
