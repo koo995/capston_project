@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "api";
 import Post from "./Post";
-import { Alert, Pagination } from "antd";
+import { Alert, List } from "antd";
 import "./PostList.scss";
 import { useAppContext } from "store";
 
@@ -35,14 +35,17 @@ function PostList({ selectedTags }) {
           <Alert type="warning" message="포스팅이 없습니다" />
         )}
         {/* postList에서 꺼내온 녀석은 object이니까 render가 안된다? JSON.stringify을 이용한다 */}
-        <div className="post-list-grid">
-          {postList.map((post) => {
-            return <Post post={post} key={post.id} />; //backend에서 serializer로 id값을 표기안했더니 post.id값이 없는 값이었네
-          })}
-        </div>
-      </div>
-      <div>
-        <Pagination defaultCurrent={1} total={50} />
+        <List
+          itemLayout="vertical"
+          dataSource={postList}
+          pagination={{
+            onChange: (page) => {
+              console.log(page);
+            },
+            pageSize: 15,
+          }}
+          renderItem={(post) => <Post post={post} key={post.id} />}
+        />
       </div>
     </>
   );
