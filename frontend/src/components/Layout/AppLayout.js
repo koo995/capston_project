@@ -36,7 +36,7 @@ function AppLayout({ children, tagbar, postNewButton, alertSidebar }) {
       <div className="alertSidebar" style={{ marginRight: "2rem" }}>
         {alertSidebar}
       </div>
-      <div className="footer">footer</div>
+      <div className="footer">&copy; 2023. gunhong951@gmail.com</div>
     </div>
   );
 }

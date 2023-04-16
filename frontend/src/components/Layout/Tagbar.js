@@ -25,7 +25,7 @@ export default function Tagbar({ onTagClick }) {
           marginRight: 8,
         }}
       >
-        Categories:
+        Tag:
       </span>
       <Space size={[0, 8]} wrap>
         {tags &&
