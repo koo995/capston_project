@@ -1,7 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment, Tag
-from django.db.models import Q
-from .serializers import PostSerializer, CommentSerializer, TagSerializer
+from django.db.models import Q, Count
+from .serializers import (
+    PostSerializer,
+    CommentSerializer,
+    TagSerializer,
+    SimilarPostSerializer,
+)
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
@@ -24,7 +29,11 @@ class PostViewSet(ModelViewSet):
     # 이 부분으로 처리함으로써 밑에 있는 TaggedPostsView은 쓸모가 없어졌다
     def get_queryset(self):
         tags = self.request.query_params.get("tags", None)
-        queryset = Post.objects.all()
+        queryset = (
+            Post.objects.all()
+            .annotate(comment_count=Count("comment"))
+            .order_by("-created_at")  # 최신순으로 하기 위해서 - 을 붙여준다
+        )  # annotate을 여기다 정의해야 하는군
         if tags:
             tag_list = tags.split(",")
             query = Q()
@@ -43,7 +52,7 @@ class PostViewSet(ModelViewSet):
 
 
 class SimilarPostsView(generics.ListAPIView):
-    serializer_class = PostSerializer
+    serializer_class = SimilarPostSerializer
     permission_classes = [AllowAny]
 
     # 이 녀석도 쓰이니까 지정해 준다.
