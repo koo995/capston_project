@@ -34,6 +34,7 @@ export default function Tagbar({ onTagClick }) {
               key={index}
               checked={selectedTags.includes(tag.name)}
               onChange={(checked) => onTagClick(tag.name, checked)}
+              style={{ border: "1px solid blue" }}
             >
               #{tag.name}
             </CheckableTag>
