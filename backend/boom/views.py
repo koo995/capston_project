@@ -29,6 +29,7 @@ class PostViewSet(ModelViewSet):
     # 이 부분으로 처리함으로써 밑에 있는 TaggedPostsView은 쓸모가 없어졌다
     def get_queryset(self):
         tags = self.request.query_params.get("tags", None)
+        search_keywords = self.request.query_params.get("querys", None)
         queryset = (
             Post.objects.all()
             .annotate(comment_count=Count("comment"))
@@ -40,6 +41,15 @@ class PostViewSet(ModelViewSet):
             for tag in tag_list:
                 query |= Q(tag_set__name=tag)
             queryset = queryset.filter(query).distinct()
+        if search_keywords:
+            search_keyword_list = search_keywords.split("+")
+            for search_keyword in search_keyword_list:
+                queryset = queryset.filter(
+                    Q(title__icontains=search_keyword)
+                    | Q(content__icontains=search_keyword)
+                    | Q(ocr_text__icontains=search_keyword)
+                )
+
         return queryset
 
     def perform_create(self, serializer):
