@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./AppLayout.scss";
-import { Input } from "antd";
 import LogoImage from "assets/boom.png";
 import AccountSideBar from "./AccountSideBar";
-import AlertSidebar from "./AlertSidebar";
-
-const { Search } = Input;
+import SearchBar from "components/SearchBar";
+import { QueryContext } from "components/SearchBar";
 
 function AppLayout({ children, tagbar, postNewButton, alertSidebar }) {
+  const { handleSearch } = useContext(QueryContext);
+
   return (
     <div className="app">
       <div className="header">
@@ -18,11 +18,7 @@ function AppLayout({ children, tagbar, postNewButton, alertSidebar }) {
         </h1>
         <div className="search">
           {/* 이렇게 하면 search의 길이가 줄어지네? */}
-          <Search
-            placeholder="검색어를 입력해 주세요"
-            style={{ width: 300 }}
-            size="middle"
-          />
+          <SearchBar onSearch={handleSearch} />
         </div>
         <div style={{ marginRight: "2rem" }}>
           <AccountSideBar />
