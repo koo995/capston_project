@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
 from rest_framework import mixins, generics
 from rest_framework.response import Response
+from rest_framework import filters
 from .tasks import process_image_ocr_and_translation
 
 
@@ -20,6 +21,8 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["title", "content", "ocr_text"]
 
     def get_serializer_context(self):
         context = super().get_serializer_context()  # 부모값을 받아오고
@@ -29,7 +32,7 @@ class PostViewSet(ModelViewSet):
     # 이 부분으로 처리함으로써 밑에 있는 TaggedPostsView은 쓸모가 없어졌다
     def get_queryset(self):
         tags = self.request.query_params.get("tags", None)
-        search_keywords = self.request.query_params.get("querys", None)
+        qs = self.request.query_params.get("q", None)
         queryset = (
             Post.objects.all()
             .annotate(comment_count=Count("comment"))
@@ -37,19 +40,20 @@ class PostViewSet(ModelViewSet):
         )  # annotate을 여기다 정의해야 하는군
         if tags:
             tag_list = tags.split(",")
-            query = Q()
+            query_tag = Q()
             for tag in tag_list:
-                query |= Q(tag_set__name=tag)
-            queryset = queryset.filter(query).distinct()
-        if search_keywords:
-            search_keyword_list = search_keywords.split("+")
-            for search_keyword in search_keyword_list:
-                queryset = queryset.filter(
-                    Q(title__icontains=search_keyword)
-                    | Q(content__icontains=search_keyword)
-                    | Q(ocr_text__icontains=search_keyword)
-                )
+                query_tag |= Q(tag_set__name=tag)  # |=이 연산자에 대해서 몰랐네 or조건의 연쇄인가
+            queryset = queryset.filter(query_tag).distinct()
 
+        if qs:
+            q_list = qs.split("+")
+            query_q = Q()
+            for q in q_list:
+                query_q |= (
+                    Q(title__icontain=q)
+                    or Q(content__icontain=q)
+                    or Q(ocr_text__icontain=q)
+                )
         return queryset
 
     def perform_create(self, serializer):
