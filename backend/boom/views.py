@@ -45,15 +45,6 @@ class PostViewSet(ModelViewSet):
                 query_tag |= Q(tag_set__name=tag)  # |=이 연산자에 대해서 몰랐네 or조건의 연쇄인가
             queryset = queryset.filter(query_tag).distinct()
 
-        if qs:
-            q_list = qs.split("+")
-            query_q = Q()
-            for q in q_list:
-                query_q |= (
-                    Q(title__icontain=q)
-                    or Q(content__icontain=q)
-                    or Q(ocr_text__icontain=q)
-                )
         return queryset
 
     def perform_create(self, serializer):
