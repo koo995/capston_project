@@ -45,7 +45,9 @@ class PostSerializer(serializers.ModelSerializer):
     tag_set = TagSerializer(read_only=True, many=True)
     ocr_text = serializers.CharField(read_only=True)
     similar_post_set = SimilarPostSerializer(read_only=True, many=True)
-    comment_count = serializers.IntegerField()  # annotate으로 만들걸 이렇게 써줘야 하구나
+    comment_count = serializers.IntegerField(
+        read_only=True
+    )  # annotate으로 만들걸 이렇게 써줘야 하구나
 
     class Meta:
         model = Post
