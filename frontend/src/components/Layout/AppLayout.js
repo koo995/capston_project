@@ -7,6 +7,10 @@ import AlertSidebar from "./AlertSidebar";
 
 const { Search } = Input;
 
+const onSearch = (event) => {
+  const keywords = event.target.value;
+}
+
 function AppLayout({ children, tagbar, postNewButton, alertSidebar }) {
   return (
     <div className="app">
@@ -22,6 +26,7 @@ function AppLayout({ children, tagbar, postNewButton, alertSidebar }) {
             placeholder="검색어를 입력해 주세요"
             style={{ width: 300 }}
             size="middle"
+            onPressEnter={onSearch}
           />
         </div>
         <div style={{ marginRight: "2rem" }}>
