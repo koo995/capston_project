@@ -23,7 +23,9 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
 from pathlib import Path
 import os
+import json
 from datetime import timedelta
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -33,7 +35,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-b3iceily9wafsg%^lv!0a(#kypp!*#ku@kbtjc%jz+-15r+qf="
+# SECRET_KEY = "django-insecure-b3iceily9wafsg%^lv!0a(#kypp!*#ku@kbtjc%jz+-15r+qf="
+with open(os.path.join(BASE_DIR, "secret.json"), "r") as f:
+    secret = json.load(f)
+
+
+def get_secret():
+    try:
+        return secret["SECRET_KEY"]
+    except KeyError:
+        message = "secret key을 설정해 주세요."
+        raise ImproperlyConfigured(message)
+
+
+SECRET_KEY = get_secret()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
