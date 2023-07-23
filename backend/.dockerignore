@@ -1,0 +1,5 @@
+/meida
+/static
+# 이걸 절대 포함시키면 안된다
+db.sqlite3
+unti.txt

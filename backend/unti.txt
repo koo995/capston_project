@@ -1,0 +1,10 @@
+docker run --rm --publish 9999:80 \
+    -e DJANGO_SETTINGS_MODULE=backend.settings.prod \
+    -e AZURE_ACCOUNT_NAME=capstonboom \
+    -e AZURE_ACCOUNT_KEY="amg4QeEHEIalPA3bypRuMVTHQ8Mxexhm7q0K3ur6SFU8fYwVhOzZm9AgIhh6mJv3jV9/VaAdQML7+AStWfLIGg==" \
+    -e ALLOWED_HOSTS=localhost \
+    -e DB_HOST=capstonproject.postgres.database.azure.com \
+    -e DB_USER=gunhong@capstonproject \
+    -e DB_PASSWORD="QWER123t" \
+    -e DB_NAME=postgres \
+    keonhong/capstonproject:0.1

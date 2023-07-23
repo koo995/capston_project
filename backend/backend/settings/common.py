@@ -53,6 +53,7 @@ SECRET_KEY = get_secret()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# 디버그가 거짓일 때는 이 옵션을 필히 지정해 줘야 한다.
 ALLOWED_HOSTS = []
 
 
