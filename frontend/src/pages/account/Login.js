@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import Axios from "axios";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { useAppContext, setToken } from "store";
+import { axiosInstance } from "api";
 
 export default function Login() {
   const { store, dispatch } = useAppContext();
@@ -24,13 +25,12 @@ export default function Login() {
     async function fn() {
       const { username, password } = values;
       const data = { username, password }; //조금더 명시적으로 하기 위함??
+      const apiURL = "/account/token/";
       try {
         //응답을 꼭 받아야 한다. 토큰을 받아야 하니까
-        const response = await Axios.post(
-          "http://127.0.0.1:8000/account/token/",
-          data,
-          { headers: { "Content-Type": "application/json" } }
-        );
+        const response = await Axios.post(apiURL, data, {
+          headers: { "Content-Type": "application/json" },
+        });
         // const { data: token } = response; 이런 방식은 아래랑 다르다 response에서 data을 꺼내서 이름을 token이라 짓는 것
         // const token = response.data 와 일치하며 밑에 녀석은
         // const jwtAccessToken = response.data.access 과 일치한다
