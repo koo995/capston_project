@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, Form, Input, notification, Upload } from "antd";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
+import { axiosInstance } from "api";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { PlusOutlined } from "@ant-design/icons";
 import { parseErrorMessages } from "utils/forms";
@@ -29,10 +30,10 @@ export default function Signip() {
         //이 부분 chatgpt로 해결... 굿
         formData.append("avatar", avatar.file);
       }
-
+      const apiURL = "account/signup/";
       setFieldErrors({});
       try {
-        await Axios.post("http://127.0.0.1:8000/account/signup/", formData);
+        await axiosInstance.post(apiURL, formData);
         notification.open({
           message: "회원가입 성공!",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,

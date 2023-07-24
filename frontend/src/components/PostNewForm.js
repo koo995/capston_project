@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Form, Input, Button, Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import Axios from "axios";
+import { axiosInstance } from "api";
 import { useAppContext } from "store";
 import { useHistory } from "react-router-dom";
 
@@ -25,16 +26,12 @@ export default function PostNewForm() {
     if (photo?.file) {
       formData.append("photo", photo.file);
     }
-
+    const apiURL = "api/posts/";
     const headers = { Authorization: `Bearer ${jwtAccessToken}` };
     try {
-      const response = await Axios.post(
-        "http://127.0.0.1:8000/api/posts/",
-        formData,
-        {
-          headers,
-        }
-      );
+      const response = await axiosInstance.post(apiURL, formData, {
+        headers,
+      });
       console.log(response);
       history.push("/");
     } catch (error) {

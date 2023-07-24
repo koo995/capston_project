@@ -28,7 +28,7 @@ export default function Login() {
       const apiURL = "/account/token/";
       try {
         //응답을 꼭 받아야 한다. 토큰을 받아야 하니까
-        const response = await Axios.post(apiURL, data, {
+        const response = await axiosInstance.post(apiURL, data, {
           headers: { "Content-Type": "application/json" },
         });
         // const { data: token } = response; 이런 방식은 아래랑 다르다 response에서 data을 꺼내서 이름을 token이라 짓는 것
