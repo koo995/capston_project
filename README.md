@@ -6,4 +6,9 @@
   그리고 그 데이터를 기반으로 전통적인 유사성 감지 방법인 코사인 유사도를 측정하고, 연관된 게시물을 찾아 추천되도록 서비스를 개발
 </p>
 <hr>
-<p>* 추가할 것<br> 프론트엔드에서 검색 쿼리 전달 미완성<br></p>
+<h3>프로젝트 구조</h3>
+<img src="https://github.com/koo995/capston_project/assets/107671886/4c03092f-fa0c-477e-976d-434be60f6290">
+<hr>
+<h3>학술대회 논문</h3>
+<p>이 프로젝트는 한국방송·미디어공학회 2023 하계학술대회에 제출된 논문입니다.</p>
+[링크 클릭](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11514283)
