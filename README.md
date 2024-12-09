@@ -1,4 +1,5 @@
 # capston_project
+> 기술 스택: Python, JavaScript, Django, React, Redis, Celery, Scikit-learn, Microsoft Azure, Google Cloud Platform, SQLite
 ## OCR과 translation을 이용한 질의응답 서비스
 > 이미지 처리는 Google Cloud VisionAI의 OCR(Optical Character Recognition) 기능을 이용한다. OCR을 이용해서 얻은 텍스트는 Google Cloud Translate을 이용하여 한국어로 번역한다.
 > 함께 등록된 이미지에서 텍스트를 추출하고 그 정보를 이용하여 유사성을 감지하고자 한다. 질문자가 게시물을 작성하면, 그 게시물의 이미지에 OCR과 그 결과를 번역하여 데이터베이스에 저장한다.<br>
